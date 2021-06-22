@@ -9,12 +9,36 @@
         <field name="arch" type="xml">
 
             <field name="vat" position="before">
-
                 <button name="button_consulta"
                             string="Consulta"
                             type="object"
                             class="oe_highlight" />
             </field>
+
+            <field name="first_name" position="replace">
+                <field name="first_name" placeholder="Ape. Paterno"/>
+                
+            </field>
+
+
+            <field name="partner_name" position="replace">
+                <field name="partner_name" placeholder="Nombre"/>
+                
+            </field>
+
+            <field name="social_reason" position="replace">
+                <field name="social_reason" />
+                
+            </field>
+
+            <field name="tradename" position="replace">
+                <field name="tradename"/>
+                
+            </field>
+            
+
+
+
         </field>
     </record>
     
