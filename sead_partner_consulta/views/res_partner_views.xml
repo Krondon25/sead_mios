@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_partner_form_sead" model="ir.ui.view">
+        <field name="name">res partner sead</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="1600"/>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+
+            <field name="vat" position="before">
+
+                <button name="button_consulta"
+                            string="Consulta"
+                            type="object"
+                            class="oe_highlight" />
+            </field>
+        </field>
+    </record>
+    
+</odoo>
