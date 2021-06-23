@@ -63,6 +63,8 @@ class IdentificationQuery(models.TransientModel):
                 distrito = self.env['l10n_pe.res.city.district'].search([])
                 provincia = self.env['res.city'].search([])
                 departamento = self.env['res.country.state'].search([])
+                departamento = self.env['res.country.state'].search([])
+                identification_id = self.env['l10n_latam.identification.type'].search([("name",'=',"RUC")])
 
                 for record_distrito in distrito:
                     if record_distrito.name == data_distrito:
@@ -80,7 +82,7 @@ class IdentificationQuery(models.TransientModel):
                     
                     partner.create({
                         "name": data_response.get('razonSocial'),
-                        "l10n_latam_identification_type_id": 0,
+                        "l10n_latam_identification_type_id": identification_id,
                         "vat": self.number_identification,
                         "tradename": data_response.get('razonSocial'),
                         "social_reason": data_response.get('razonSocial'),
