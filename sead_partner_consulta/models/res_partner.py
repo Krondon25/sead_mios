@@ -36,15 +36,16 @@ class IdentificationQuery(models.TransientModel):
             data_response =response.content
             data_response = json.loads(data_response)
             if tipo_identificacion == 5:
+                nombre_completo = "{0} {1} {2}".format(data_response.get('nombres'),data_response.get('apellidoPaterno'),data_response.get('apellidoMaterno'))
                 partner.create({
-                    "name": data_response.get('nombres'),
+                    "name": nombre_completo,
                     "partner_name": data_response.get('nombres'),
                     "l10n_latam_identification_type_id": tipo_identificacion,
                     "vat": self.number_identification,
                     "first_name": data_response.get('apellidoPaterno'),
                     "second_name": data_response.get('apellidoMaterno'),
-                    "social_reason": data_response.get('nombres'),
-                    "tradename": data_response.get('nombres'),
+                    "social_reason": nombre_completo,
+                    "tradename": nombre_completo,
                     "country_id": 173,
                     })
 
@@ -79,7 +80,7 @@ class IdentificationQuery(models.TransientModel):
                     
                     partner.create({
                         "name": data_response.get('razonSocial'),
-                        "l10n_latam_identification_type_id": tipo_identificacion,
+                        "l10n_latam_identification_type_id": 0,
                         "vat": self.number_identification,
                         "tradename": data_response.get('razonSocial'),
                         "social_reason": data_response.get('razonSocial'),
@@ -90,6 +91,7 @@ class IdentificationQuery(models.TransientModel):
                         "city_id":data_provincia,
                         "state_id":data_departamento,
                         "country_id": 173,
+                        "company_type": "company",
                         })
         
             else:
