@@ -23,23 +23,25 @@
 
             <field name="partner_name" position="replace">
                 <field name="partner_name" placeholder="Nombre"/>
-                
             </field>
-
-            <field name="social_reason" position="replace">
-                <field name="social_reason" />
-                
-            </field>
-
-            <field name="tradename" position="replace">
-                <field name="tradename"/>
-                
-            </field>
-            
-
 
 
         </field>
     </record>
+
+    <record id="view_partner_form_inherit_edit" model="ir.ui.view">
+            <field name="name">view.partner.form.inherit.edit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_pe_invoice_edocument.view_partner_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="social_reason" position="attributes">
+                    <attribute name="required">0</attribute>
+                </field>
+                <field name="tradename" position="attributes">
+                    <attribute name="required">0</attribute>
+                </field>
+            </field>
+        </record>
     
 </odoo>
+
