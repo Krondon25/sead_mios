@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 """."""
 
-from odoo import fields, models
+from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 import requests
 import json
+
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+
+    @api.constrains('vat')
+    def _constrains_vat(self):
+        if self.search([('vat', '=', self.vat), ('id', '!=', self.id), ('vat', '!=', False)]):
+            raise ValidationError('Ya existe este usuario en el sistema')
 
 
 class IdentificationQuery(models.TransientModel):
