@@ -53,22 +53,21 @@ class IdentificationQuery(models.TransientModel):
                 data_distrito = ''
                 data_provincia = ''
                 data_departamento = ''
-                if data_response.get('distrito'):
-                        data_distrito = data_response.get('distrito').capitalize()
+                # if data_response.get('distrito'):
+                #         data_distrito = data_response.get('distrito').capitalize()
                 if data_response.get('provincia'):
                     data_provincia = data_response.get('provincia').capitalize()
                 if data_response.get('departamento'):
                     data_departamento = data_response.get('departamento').capitalize()
 
-                distrito = self.env['l10n_pe.res.city.district'].search([])
+                #distrito = self.env['l10n_pe.res.city.district'].search([])
                 provincia = self.env['res.city'].search([])
                 departamento = self.env['res.country.state'].search([])
-                departamento = self.env['res.country.state'].search([])
-                identification_id = self.env['l10n_latam.identification.type'].search([("name",'=',"RUC")])
-
-                for record_distrito in distrito:
-                    if record_distrito.name == data_distrito:
-                        data_distrito = record_distrito.id
+                identification_id = self.env['l10n_latam.identification.type'].search([("name",'=',"RUC")],limit=1)
+                
+                # for record_distrito in distrito:
+                #     if record_distrito.name == data_distrito:
+                #         data_distrito = record_distrito.id
 
                 for record_provincia in provincia:
                     if record_provincia.name == data_provincia:
@@ -79,17 +78,16 @@ class IdentificationQuery(models.TransientModel):
                         data_departamento = record_departamneto.id 
 
                 if 'success' not in data_response:
-                    
                     partner.create({
                         "name": data_response.get('razonSocial'),
-                        "l10n_latam_identification_type_id": identification_id,
+                        "l10n_latam_identification_type_id": identification_id.id,
                         "vat": self.number_identification,
                         "tradename": data_response.get('razonSocial'),
                         "social_reason": data_response.get('razonSocial'),
                         "street": data_response.get('direccion'),
                         "phone": data_response.get('telefonos'),
                         "ubigeo": data_response.get('ubigeo'),
-                        "l10n_pe_district":data_distrito,
+                        #"l10n_pe_district":data_distrito,
                         "city_id":data_provincia,
                         "state_id":data_departamento,
                         "country_id": 173,
