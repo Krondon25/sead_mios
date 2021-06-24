@@ -14,7 +14,7 @@ class ResPartner(models.Model):
     @api.constrains('vat')
     def _constrains_vat(self):
         if self.search([('vat', '=', self.vat), ('id', '!=', self.id), ('vat', '!=', False)]):
-            raise ValidationError('Ya existe este usuario en el sistema')
+            raise ValidationError('El contacto o empresa ya se encuentra registrado en el sistema')
 
 
 class IdentificationQuery(models.TransientModel):
